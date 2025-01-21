@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} DjangoBlog | Home {% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-semibold mb-6">Welcome to DjangoBlog</h1>
+  <div class="space-y-6">
+    {% for blog in blogs %}
+    <div class="bg-[#B9E5E8] shadow-sm rounded-md p-4 mb-4 flex items-center justify-between">
+      <div class="flex-1">
+        <h3 class="text-2xl font-semibold text-black">{{ blog.title }}</h3>
+        <p class="text-sm text-gray-800 mb-2">{{ blog.description|slice:":100" }}...</p>
+        <p class="text-xs text-gray-600">Posted on {{ blog.posted_on }} by <span class="font-bold">{{ blog.user }}</span></p>
+      </div>
+      <div class="ml-4">
+        <a href="{% url 'view_blog' blog.id %}" class="bg-green-500 text-white py-2 px-4 rounded">View</a>
+      </div>
+    </div>
+    {% empty %}
+    <p>No blogs available yet. Start creating one!</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

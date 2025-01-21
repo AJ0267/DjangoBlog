@@ -1,0 +1,53 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %} DjangoBlog | Register {% endblock %}
+
+{% block body %}
+<div class="hero bg-base-200 min-h-screen">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="text-center lg:text-left"></div>
+      <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <form class="card-body" method="POST">
+          {% csrf_token %}
+          <h1 class="text-3xl font-bold">Register Form</h1>
+
+          <div class="form-control">
+            <label class="label">{{ registerform.username.label_tag }}</label>
+            <input type="text" name="username" class="input input-bordered w-full" placeholder="Enter Username">
+            {% if registerform.username.errors %}
+              <p class="text-red-500">{{ registerform.username.errors }}</p>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label">{{ registerform.email.label_tag }}</label>
+            <input type="email" name="email" class="input input-bordered w-full" placeholder="Enter Email">
+            {% if registerform.email.errors %}
+              <p class="text-red-500">{{ registerform.email.errors }}</p>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label">{{ registerform.password1.label_tag }}</label>
+            <input type="password" name="password1" class="input input-bordered w-full" placeholder="Enter Password">
+            {% if registerform.password1.errors %}
+              <p class="text-red-500">{{ registerform.password1.errors }}</p>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label">{{ registerform.password2.label_tag }}</label>
+            <input type="password" name="password2" class="input input-bordered w-full" placeholder="Confirm Password">
+            {% if registerform.password2.errors %}
+              <p class="text-red-500">{{ registerform.password2.errors }}</p>
+            {% endif %}
+          </div>
+
+          <div class="form-control mt-6">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

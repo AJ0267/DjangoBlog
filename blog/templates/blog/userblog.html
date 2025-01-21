@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} DjangoBlog | My Blogs {% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-semibold mb-6">{{ request.user.username }}'s Blogs</h1>
+
+  <div class="space-y-6">
+    {% for blog in blogs %}
+    <div class="bg-[#E8FFC2] shadow-sm rounded-md p-4 mb-4">
+      <div class="flex justify-between">
+        <h3 class="text-2xl font-semibold text-black">{{ blog.title }}</h3>
+        <div class="space-x-2">
+          <form method="POST" action="{% url 'edit_blog' blog.id %}" class="inline-block">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-info">Edit</button>
+          </form>
+          <form method="POST" action="{% url 'delete_blog' blog.id %}" class="inline-block">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-error">Delete</button>
+          </form>
+          <a href="{% url 'view_blog' blog.id %}" class="btn btn-sm btn-success">View</a>
+        </div>
+      </div>
+      <p class="text-sm text-gray-800 mb-2">{{ blog.description|slice:":100" }}...</p>
+      <p class="text-xs text-gray-600">Posted on {{ blog.posted_on }}</p>
+    </div>
+    {% empty %}
+    <p>No blogs available yet. Start creating one!</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

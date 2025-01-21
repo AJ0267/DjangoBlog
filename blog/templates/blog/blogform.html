@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} DjangoBlog | AddBlog {% endblock %}
+
+{% block body %}
+<div class="max-w-lg mx-auto px-4 py-8">
+  <div class="bg-[#B9E5E8] shadow-lg rounded-lg p-6 mb-6">
+    <h1 class="text-3xl text-gray-900 font-semibold mb-6">Add a New Blog</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-4">
+        {% for field in form %}
+          <div class="mb-2">
+            <label for="{{ field.id_for_label }}" class="block text-base font-medium text-gray-700">{{ field.label }}</label>
+            <div class="mt-1">
+              {{ field }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    
+      <button type="submit" class="bg-[#3CCF4E] text-gray-900 py-2 px-4 rounded w-full">Add Blog</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

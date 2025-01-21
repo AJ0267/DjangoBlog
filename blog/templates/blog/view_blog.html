@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+
+{% block title %} DjangoBlog | Blog by {{ blog.user.username }} {% endblock %}
+
+
+{% block body %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+  <div class="bg-[#BCFFB9] shadow-sm rounded-md p-6 mb-6">
+    <h1 class="text-3xl text-gray-900 font-semibold mb-6">{{ blog.title }}</h1>
+    <p class="text-lg text-gray-800 mb-4">{{ blog.description }}</p>
+    <p class="text-xs text-gray-600">Posted on {{ blog.posted_on }} by <span class="font-bold">{{ blog.user }}</span></p>
+  </div>
+  <div class="mt-4">
+    <button onclick="window.history.back()" class="bg-red-500 text-white py-2 px-4 rounded">Back</button>
+  </div>
+</div>
+{% endblock %}

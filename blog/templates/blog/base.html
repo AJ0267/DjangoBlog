@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'blog/css/output.css' %}">
+</head>
+<body>
+    <div class="navbar bg-base-100 flex justify-between">
+      <a href="{% url 'home' %}" class="btn btn-ghost text-xl">Home</a>
+    
+      <div class="flex space-x-2">
+        {% if user.is_authenticated %}
+          <a href="{% url 'myblogs' %}" class="btn btn-primary">My Blogs</a>
+          <a href="{% url 'add_blog' %}" class="btn btn-success">Create</a>
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-error">Logout</button>
+          </form>
+        {% else %}
+          <a href="{% url 'loginuser' %}" class="btn btn-primary">Login</a>
+        {% endif %}
+      </div>
+    </div>
+    {% block body %} {% endblock %}
+  </body>
+</html>

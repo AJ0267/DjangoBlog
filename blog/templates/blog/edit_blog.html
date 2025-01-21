@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} DjangoBlog | EditBlog {% endblock %}
+
+{% block body %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex gap-8">
+    <div class="bg-[#B9E5E8] shadow-sm rounded-md p-6 w-1/3">
+      <h2 class="text-2xl text-gray-900 font-bold mb-4">Current Data</h2>
+      <div class="mb-4">
+        <p class="text-lg text-gray-800"><strong>Title:</strong> {{ blog.title }}</p>
+        <p class="text-lg text-gray-800"><strong>Description:</strong> {{ blog.description }}</p>
+      </div>
+    </div>
+
+
+    <div class="shadow-sm rounded-md p-6 w-2/3 bg-[#E8FFC2]">
+      <h2 class="text-2xl text-gray-900 font-bold mb-4">Edit Data</h2>
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}:</label>
+            <div class="mt-1">
+              {{ field }}
+            </div>
+          </div>
+        {% endfor %}
+        
+        <button type="submit" class="bg-[#3CCF4E] text-gray-900 py-2 px-4 rounded w-full">Save Changes</button>
+
+        <div class="mt-4 text-center">
+            <a href="{% url 'myblogs' %}" class="text-blue-500 hover:bg-red-500 hover:text-black py-2 px-4 rounded">Cancel</a>
+          </div>
+          
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

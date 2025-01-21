@@ -1,0 +1,45 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %} DjangoBlog | Login {% endblock %}
+
+{% block body %}
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left"></div>
+    <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <form class="card-body" method="POST">
+        {% csrf_token %}
+        <h1 class="text-3xl font-bold">Login Form</h1>
+
+        {% if messages %}
+          <div class="text-red-500 mb-4">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="form-control">
+          <label class="label">{{ loginForm.username.label_tag }}</label>
+          <input type="text" name="username" class="input input-bordered w-full" placeholder="Enter Username">
+          {% if loginForm.username.errors %}
+            <p class="text-red-500">{{ loginForm.username.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-control">
+          <label class="label">{{ loginForm.password.label_tag }}</label>
+          <input type="password" name="password" class="input input-bordered w-full" placeholder="Enter Password">
+          {% if loginForm.password.errors %}
+            <p class="text-red-500">{{ loginForm.password.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-control mt-6">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
